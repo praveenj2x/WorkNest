@@ -1,29 +1,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Sorts+Mill+Goudy:ital@0;1&family=Yarndings+20&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yarndings+20&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F5F1DC;
+  --foreground: #001BB7;
+  --primary: #0046FF;
+  --accent: #FF8040;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #001BB7;
+    --foreground: #F5F1DC;
+    --primary: #0046FF;
+    --accent: #FF8040;
   }
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Optimize for performance */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent layout shift during animations */
+img, video {
+  will-change: transform;
 }
 
 /* Font Classes */
@@ -139,4 +163,20 @@ body {
     padding-top: 8rem;
     padding-bottom: 8rem;
   }
+}
+
+/* Hide GSAP ScrollTrigger debug markers */
+.gsap-marker-start,
+.gsap-marker-end,
+.gsap-marker-scroller-start,
+.gsap-marker-scroller-end,
+[class*="gsap-marker"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Hide any ScrollTrigger debug elements */
+div[style*="position: fixed"][style*="z-index"] {
+  display: none !important;
 }
