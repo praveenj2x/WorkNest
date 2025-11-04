@@ -15,16 +15,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://worknest.kushinpi.com",
+    url: "https://worknest.dev",
     title: "WorkNest - Empower HR with Intelligence",
     description: "Transform your workplace with AI-powered HR insights, streamlined workflows, and intelligent automation that puts people first.",
     siteName: "WorkNest",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "WorkNest - Empower HR with Intelligence",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "WorkNest - Empower HR with Intelligence",
     description: "Transform your workplace with AI-powered HR insights, streamlined workflows, and intelligent automation that puts people first.",
     creator: "@worknest",
+    images: ["/og-image.png"],
   },
   viewport: {
     width: "device-width",

@@ -15,14 +15,7 @@ export default function ContactSection() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
+    visible: { opacity: 1, y: 0 }
   };
 
   const contactOptions = [
@@ -56,6 +49,7 @@ export default function ContactSection() {
           initial="hidden"
           animate="visible"
           variants={containerVariants}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center mb-16 md:mb-20">

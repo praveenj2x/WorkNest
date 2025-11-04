@@ -4,27 +4,12 @@ import { motion } from 'framer-motion';
 export default function AboutHero() {
   const headingVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
+    visible: { opacity: 1, y: 0 }
   };
 
   const textVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        delay: 0.3,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
+    visible: { opacity: 1, y: 0 }
   };
 
   return (
@@ -36,6 +21,7 @@ export default function AboutHero() {
             initial="hidden"
             animate="visible"
             variants={headingVariants}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="mb-8"
           >
             <h1 className="sorts-mill-goudy-regular text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-[#001BB7] leading-tight">
@@ -51,6 +37,7 @@ export default function AboutHero() {
             initial="hidden"
             animate="visible"
             variants={textVariants}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             className="max-w-3xl mx-auto"
           >
             <p className="funnel-sans-regular text-xl md:text-2xl text-[#001BB7]/80 leading-relaxed">
