@@ -107,7 +107,7 @@ export default function HeroSection() {
             className="w-full h-64 md:h-80 lg:h-96 bg-[#0046FF] relative overflow-hidden rounded-3xl p-2 cursor-pointer"
           >
             <img
-              src="/images/hero.gif"
+              src="https://ik.imagekit.io/4vuzhxb7l/hero.gif?updatedAt=1762240071864"
               alt="Team collaboration"
               className="w-full h-full object-cover rounded-3xl"
             />

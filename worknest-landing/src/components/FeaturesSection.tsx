@@ -7,53 +7,58 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function FeaturesSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate heading first
-      gsap.fromTo(
-        ".features-heading",
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: ".features-heading",
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      // Animate cards with stagger
-      cardsRef.current.forEach((card, index) => {
-        if (card) {
-          gsap.fromTo(
-            card,
-            { 
-              opacity: 0, 
-              y: 60,
-              scale: 0.9
-            },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.8,
-              delay: index * 0.1,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 85%',
-                toggleActions: 'play none none reverse'
-              }
+      // Animate heading
+      if (headingRef.current) {
+        gsap.fromTo(
+          headingRef.current,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: headingRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+              markers: false
             }
-          );
-        }
-      });
+          }
+        );
+      }
+
+      // Animate cards with stagger using batch
+      if (cardsContainerRef.current) {
+        const cards = cardsContainerRef.current.querySelectorAll('.feature-card');
+        
+        gsap.fromTo(
+          cards,
+          { 
+            opacity: 0, 
+            y: 60,
+            scale: 0.95
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: cardsContainerRef.current,
+              start: 'top 75%',
+              toggleActions: 'play none none reverse',
+              markers: false
+            }
+          }
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -63,22 +68,22 @@ export default function FeaturesSection() {
     {
       title: "Easy Onboarding",
       description: "Welcome new hires with streamlined digital onboarding that guides them through every step, from paperwork to first-day setup.",
-      image: "images/office.png"
+      image: "https://ik.imagekit.io/4vuzhxb7l/office.png?updatedAt=1762240070418"
     },
     {
       title: "Easy Management",
       description: "Manage your entire workforce from one intuitive dashboard. Track performance, schedules, and team dynamics effortlessly.",
-      image: "images/managemnt.png"
+      image: "https://ik.imagekit.io/4vuzhxb7l/managemnt.png?updatedAt=1762240071379"
     },
     {
       title: "Easy Review Process",
       description: "Conduct meaningful performance reviews with AI-powered insights, goal tracking, and automated feedback collection.",
-      image: "images/review.png"
+      image: "https://ik.imagekit.io/4vuzhxb7l/review.png?updatedAt=1762240071683"
     },
     {
       title: "Better Analytics",
       description: "Make data-driven decisions with comprehensive workforce analytics, predictive insights, and customizable reporting.",
-      image: "images/analytics.png"
+      image: "https://ik.imagekit.io/4vuzhxb7l/analytics.png?updatedAt=1762240071533"
     }
   ];
 
@@ -87,20 +92,23 @@ export default function FeaturesSection() {
       <div className="px-6 md:px-12 lg:px-16 xl:px-24 py-20 md:py-32">
         {/* Heading */}
         <div className="mb-16 md:mb-24">
-          <h2 className="features-heading sorts-mill-goudy-regular text-5xl md:text-6xl lg:text-7xl text-[#001BB7] leading-tight max-w-4xl">
+          <h2 
+            ref={headingRef}
+            className="text-5xl md:text-6xl lg:text-7xl text-[#001BB7] leading-tight max-w-4xl font-serif"
+          >
             WorkNest meets HR teams where they are.
           </h2>
         </div>
 
         {/* Grid Container - 4 columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div 
+          ref={cardsContainerRef}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+        >
           {features.map((feature, index) => (
             <div
               key={index}
-              ref={(el) => { 
-                cardsRef.current[index] = el; 
-              }}
-              className="group"
+              className="feature-card group"
               style={{ willChange: 'transform' }}
             >
               {/* Image */}
@@ -113,12 +121,12 @@ export default function FeaturesSection() {
               </div>
 
               {/* Title */}
-              <h3 className="sorts-mill-goudy-regular text-xl md:text-2xl text-[#001BB7] mb-2">
+              <h3 className="text-xl md:text-2xl text-[#001BB7] mb-2 font-serif">
                 {feature.title}
               </h3>
 
               {/* Description */}
-              <p className="funnel-sans-regular text-sm md:text-base text-[#001BB7]/70 leading-relaxed">
+              <p className="text-sm md:text-base text-[#001BB7]/70 leading-relaxed font-sans">
                 {feature.description}
               </p>
             </div>
