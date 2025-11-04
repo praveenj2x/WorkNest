@@ -85,7 +85,7 @@ function FAQSection() {
   };
 
   return (
-    <section ref={sectionRef} className="bg-[#F5F1DC] py-20 md:py-32" style={{ willChange: 'transform', marginTop: '-0.5px' }}>
+    <section ref={sectionRef} className="bg-[#F5F1DC] py-20 md:py-32" style={{ willChange: 'transform', marginTop: '-0.5px' }} id="faq">
       <div className="px-6 md:px-12 lg:px-16 xl:px-24">
         {/* Section Title */}
         <div ref={titleRef} className="mb-16 md:mb-20">

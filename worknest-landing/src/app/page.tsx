@@ -4,6 +4,7 @@ import FeaturesSection from '@/components/FeaturesSection';
 import MissionSection from '@/components/MissionSection';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
+import PricingSection from '@/components/PricingSection';
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <HeroSection />
       <FeaturesSection/>
       <MissionSection/>
+      <PricingSection/>
       <FAQSection/>
       <Footer/>
     </div>

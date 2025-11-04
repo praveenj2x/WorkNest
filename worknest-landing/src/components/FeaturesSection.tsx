@@ -68,27 +68,27 @@ export default function FeaturesSection() {
     {
       title: "Easy Onboarding",
       description: "Welcome new hires with streamlined digital onboarding that guides them through every step, from paperwork to first-day setup.",
-      image: "https://ik.imagekit.io/4vuzhxb7l/office.png?updatedAt=1762240070418"
+      image: "/images/office.png"
     },
     {
       title: "Easy Management",
       description: "Manage your entire workforce from one intuitive dashboard. Track performance, schedules, and team dynamics effortlessly.",
-      image: "https://ik.imagekit.io/4vuzhxb7l/managemnt.png?updatedAt=1762240071379"
+      image: "/images/managemnt.png"
     },
     {
       title: "Easy Review Process",
       description: "Conduct meaningful performance reviews with AI-powered insights, goal tracking, and automated feedback collection.",
-      image: "https://ik.imagekit.io/4vuzhxb7l/review.png?updatedAt=1762240071683"
+      image: "/images/review.png"
     },
     {
       title: "Better Analytics",
       description: "Make data-driven decisions with comprehensive workforce analytics, predictive insights, and customizable reporting.",
-      image: "https://ik.imagekit.io/4vuzhxb7l/analytics.png?updatedAt=1762240071533"
+      image: "/images/analytics.png"
     }
   ];
 
   return (
-    <section ref={sectionRef} className="bg-[#F5F1DC]" style={{ willChange: 'transform', marginTop: '-0.5px' }}>
+    <section ref={sectionRef} className="bg-[#F5F1DC]" style={{ willChange: 'transform', marginTop: '-0.5px' }} id="features">
       <div className="px-6 md:px-12 lg:px-16 xl:px-24 py-20 md:py-32">
         {/* Heading */}
         <div className="mb-16 md:mb-24">

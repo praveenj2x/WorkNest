@@ -180,3 +180,8 @@ img, video {
 div[style*="position: fixed"][style*="z-index"] {
   display: none !important;
 }
+
+::selection {
+  background: #ff8040; 
+  color: #fff; 
+}

@@ -54,33 +54,14 @@ export default function HeroSection() {
         '-=0.3'
       );
 
-      // Hover animation for image box
-      const imageBox = imageBoxRef.current;
 
-      if (imageBox) {
-        imageBox.addEventListener('mouseenter', () => {
-          gsap.to(imageBox, {
-            scale: 1.02,
-            duration: 0.3,
-            ease: 'power2.out'
-          });
-        });
-
-        imageBox.addEventListener('mouseleave', () => {
-          gsap.to(imageBox, {
-            scale: 1,
-            duration: 0.3,
-            ease: 'power2.out'
-          });
-        });
-      }
     });
 
     return () => ctx.revert(); // Cleanup
   }, []);
 
   return (
-    <section className="min-h-screen bg-[#F5F1DC]">
+    <section className="min-h-screen bg-[#F5F1DC]" id="home">
       <div className="px-6 md:px-12 lg:px-16 xl:px-24 py-20 md:py-32">
         {/* Main Headline with staggered layout */}
         <div className="mb-32 md:mb-40">
@@ -104,7 +85,7 @@ export default function HeroSection() {
         <div className="mb-16 md:mb-20">
           <div
             ref={imageBoxRef}
-            className="w-full h-64 md:h-80 lg:h-96 bg-[#0046FF] relative overflow-hidden rounded-3xl p-2 cursor-pointer"
+            className="w-full h-64 md:h-80 lg:h-96 bg-[#0046FF] relative overflow-hidden rounded-3xl p-2"
           >
             <img
               src="https://ik.imagekit.io/4vuzhxb7l/hero.gif?updatedAt=1762240071864"
