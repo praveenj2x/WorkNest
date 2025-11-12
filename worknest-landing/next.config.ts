@@ -18,7 +18,6 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizeCss: true,
   },
-  // Production optimizations
   poweredByHeader: false,
   compress: true,
 };
