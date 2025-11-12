@@ -1,8 +1,26 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+  images: {
+    domains: ['ik.imagekit.io', 'raw.githubusercontent.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ik.imagekit.io',
+      },
+    ],
+  },
+  experimental: {
+    optimizeCss: true,
+  },
+  // Production optimizations
+  poweredByHeader: false,
+  compress: true,
 };
 
 export default nextConfig;

@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { motion } from 'framer-motion';
 
 export default function HeroSection() {
   const headlineRef = useRef<HTMLDivElement>(null);
@@ -50,7 +49,7 @@ export default function HeroSection() {
       tl.fromTo(
         separatorRef.current,
         { opacity: 0, scaleX: 0 },
-        { opacity: 1, scaleX: 1, duration: 1, transformOrigin: 'left' },
+        { opacity: 1, scaleX: 1, duration: 1, transformOrigin: 'bottom' },
         '-=0.3'
       );
 

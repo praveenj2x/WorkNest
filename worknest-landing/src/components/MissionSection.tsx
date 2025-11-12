@@ -57,14 +57,12 @@ export default function MissionSection() {
     <section ref={sectionRef} className="bg-[#F5F1DC] py-20 md:py-32">
       <div className="px-6 md:px-12 lg:px-16 xl:px-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Image Section - Left */}
+          {/* Text Display Section - Left */}
           <div ref={imageRef} className="relative">
-            <div className="relative overflow-hidden rounded-2xl">
-              <img
-                src="/images/mission.png"
-                alt="Our Mission - Team collaboration"
-                className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
-              />
+            <div className="relative overflow-hidden rounded-2xl flex items-center justify-center h-[400px] md:h-[500px] lg:h-[600px]">
+              <span className="yarndings-20-regular text-[280px] md:text-[380px] lg:text-[480px] font-serif text-[#FF204E] leading-none select-none">
+                l
+              </span>
             </div>
           </div>
 

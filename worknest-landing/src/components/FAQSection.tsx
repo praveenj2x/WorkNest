@@ -114,7 +114,9 @@ function FAQSection() {
                   className="flex-shrink-0 mt-2"
                 >
                   <svg
-                    className="w-8 h-8 text-[#0046FF]"
+                    className={`w-8 h-8 transition-colors duration-300 ${
+                      openIndex === index ? 'text-[#FF8040]' : 'text-[#0046FF]'
+                    }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

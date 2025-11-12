@@ -68,22 +68,26 @@ export default function FeaturesSection() {
     {
       title: "Easy Onboarding",
       description: "Welcome new hires with streamlined digital onboarding that guides them through every step, from paperwork to first-day setup.",
-      image: "/images/office.png"
+      letter: "a",
+      color: "#BF092F"
     },
     {
       title: "Easy Management",
       description: "Manage your entire workforce from one intuitive dashboard. Track performance, schedules, and team dynamics effortlessly.",
-      image: "/images/managemnt.png"
+      letter: "i",
+      color: "#FF6500"
     },
     {
       title: "Easy Review Process",
       description: "Conduct meaningful performance reviews with AI-powered insights, goal tracking, and automated feedback collection.",
-      image: "/images/review.png"
+      letter: "f",
+      color: "#003161"
     },
     {
       title: "Better Analytics",
       description: "Make data-driven decisions with comprehensive workforce analytics, predictive insights, and customizable reporting.",
-      image: "/images/analytics.png"
+      letter: "p",
+      color: "#18230F"
     }
   ];
 
@@ -111,13 +115,16 @@ export default function FeaturesSection() {
               className="feature-card group"
               style={{ willChange: 'transform' }}
             >
-              {/* Image */}
-              <div className="mb-4 overflow-hidden rounded-lg">
-                <img
-                  src={feature.image}
-                  alt={feature.title}
-                  className="w-full h-[280px] md:h-[320px] lg:h-[360px] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
+              {/* Letter Display */}
+              <div 
+                className="mb-4 overflow-hidden rounded-lg flex items-center justify-center h-[280px] md:h-[320px] lg:h-[360px] transition-transform duration-700 ease-out group-hover:scale-105"
+              >
+                <span 
+                  className="yarndings-20-regular text-[180px] md:text-[220px] lg:text-[260px] font-serif leading-none select-none"
+                  style={{ color: feature.color }}
+                >
+                  {feature.letter}
+                </span>
               </div>
 
               {/* Title */}
