@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://worknest.dev"),
   title: "WorkNest - Empower HR with Intelligence",
   description: "Transform your workplace with AI-powered HR insights, streamlined workflows, and intelligent automation that puts people first. Modern HR management platform in development.",
   keywords: ["HR management", "human resources", "AI-powered", "workforce analytics", "employee onboarding", "performance management"],
@@ -35,11 +36,13 @@ export const metadata: Metadata = {
     creator: "@worknest",
     images: ["/og-image.png"],
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#001BB7",
 };
 
 export default function RootLayout({
@@ -52,7 +55,6 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#001BB7" />
       </head>
       <body className="antialiased">
         {children}
