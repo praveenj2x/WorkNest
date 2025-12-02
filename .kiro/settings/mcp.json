@@ -1,0 +1,89 @@
+{
+  "mcpServers": {
+    "fetch": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-fetch"
+      ],
+      "env": {},
+      "disabled": false,
+      "autoApprove": []
+    },
+    "github": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "your-token-here"
+      },
+      "disabled": true,
+      "autoApprove": []
+    },
+    "postgresql": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres"
+      ],
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "my-token"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "web-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@brave/brave-search-mcp-server",
+        "--transport",
+        "stdio"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "your-api-key"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "supabase": {
+      "url": "https://mcp.supabase.com/mcp",
+      "disabled": false
+    },
+    "drizzle": {
+      "command": "npx",
+      "args": [
+        "github:defrex/drizzle-mcp",
+        "./drizzle.config.ts"
+      ],
+      "disabled": false
+    },
+    "figma-desktop": {
+      "url": "http://127.0.0.1:3845/mcp",
+      "disabled": false
+    },
+    "figma": {
+      "command": "uvx",
+      "args": [
+        "@figma/mcp-server-figma@latest"
+      ],
+      "env": {
+        "FIGMA_ACCESS_TOKEN": "my-token"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "better-auth": {
+      "url": "https://mcp.chonkie.ai/better-auth/better-auth-builder/mcp",
+      "disabled": false,
+      "autoApprove": [
+        "search"
+      ]
+    }
+  }
+}

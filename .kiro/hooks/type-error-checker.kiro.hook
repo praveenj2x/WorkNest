@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Type Error Checker",
+  "description": "Automatically checks for TypeScript type errors and fixes them whenever new files are created in the workspace",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A new file has been created. Please check this file and the entire codebase for TypeScript type errors. If you find any type errors, fix them by updating the code to resolve the type issues. Focus on: 1) Missing type annotations 2) Incorrect type usage 3) Import/export type mismatches 4) Any other TypeScript compilation errors. Make the necessary changes to ensure the code is type-safe."
+  }
+}
