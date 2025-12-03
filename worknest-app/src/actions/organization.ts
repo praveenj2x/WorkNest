@@ -160,3 +160,71 @@ export async function getUserOrganization() {
 
     return membership?.organization || null;
 }
+
+export async function acceptInvitation(email: string, organizationId: string) {
+    const session = await auth.api.getSession({
+        headers: await headers()
+    });
+
+    if (!session) {
+        return { error: "You must be signed in to accept an invitation" };
+    }
+
+    // Verify the email matches the signed-in user
+    if (session.user.email !== email) {
+        return { error: "This invitation is for a different email address" };
+    }
+
+    try {
+        // Find the invitation
+        const invite = await db.query.invitation.findFirst({
+            where: (invitation, { eq, and }) => and(
+                eq(invitation.email, email),
+                eq(invitation.organizationId, organizationId)
+            ),
+        });
+
+        if (!invite) {
+            return { error: "Invitation not found" };
+        }
+
+        // Check if invitation has expired
+        if (new Date() > invite.expiresAt) {
+            return { error: "This invitation has expired" };
+        }
+
+        // Check if invitation is still pending
+        if (invite.status !== "pending") {
+            return { error: "This invitation has already been used" };
+        }
+
+        // Check if user is already a member
+        const existingMember = await db.query.member.findFirst({
+            where: eq(member.userId, session.user.id),
+        });
+
+        if (existingMember && existingMember.organizationId === organizationId) {
+            return { error: "You are already a member of this organization" };
+        }
+
+        // Create member record
+        await db.insert(member).values({
+            id: crypto.randomUUID(),
+            organizationId: organizationId,
+            userId: session.user.id,
+            role: invite.role || "member",
+            createdAt: new Date(),
+        });
+
+        // Update invitation status
+        await db
+            .update(invitation)
+            .set({ status: "accepted" })
+            .where(eq(invitation.id, invite.id));
+
+        return { success: true };
+    } catch (error) {
+        console.error("Error accepting invitation:", error);
+        return { error: "Failed to accept invitation" };
+    }
+}

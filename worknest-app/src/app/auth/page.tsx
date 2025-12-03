@@ -2,16 +2,21 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { signIn } from "@/lib/auth-client";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useSearchParams } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
-export default function SignIn() {
+function SignInContent() {
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const callbackURL = redirect || "/dashboard";
 
   return (
     <Card className="max-w-md">
@@ -38,7 +43,7 @@ export default function SignIn() {
                 await signIn.social(
                   {
                     provider: "google",
-                    callbackURL: "/dashboard"
+                    callbackURL
                   },
                   {
                     onRequest: (ctx) => {
@@ -69,7 +74,7 @@ export default function SignIn() {
                 await signIn.social(
                   {
                     provider: "github",
-                    callbackURL: "/dashboard"
+                    callbackURL
                   },
                   {
                     onRequest: (ctx) => {
@@ -115,5 +120,19 @@ export default function SignIn() {
         </div>
       </CardFooter>
     </Card>
+  );
+}
+
+export default function SignIn() {
+  return (
+    <Suspense fallback={
+      <Card className="max-w-md">
+        <CardContent className="flex items-center justify-center py-12">
+          <Loader2 className="h-8 w-8 animate-spin" />
+        </CardContent>
+      </Card>
+    }>
+      <SignInContent />
+    </Suspense>
   );
 }
