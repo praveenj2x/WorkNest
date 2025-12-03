@@ -3,9 +3,10 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { db } from "@/db";
-import { organization, member, invitation } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { organization, member, invitation, session } from "@/db/schema";
+import { eq, and } from "drizzle-orm";
 import { redirect } from "next/navigation";
+
 
 export async function createOrganization(formData: FormData) {
     const session = await auth.api.getSession({
@@ -142,6 +143,30 @@ async function sendInvitationEmails(emails: string[], organizationId: string, in
     }
 }
 
+export async function getPendingInvitations() {
+    const session = await auth.api.getSession({
+        headers: await headers()
+    });
+
+    if (!session) {
+        return [];
+    }
+
+    const invitations = await db.query.invitation.findMany({
+        where: (invitation, { eq, and }) => and(
+            eq(invitation.email, session.user.email),
+            eq(invitation.status, "pending")
+        ),
+        with: {
+            organization: true
+        }
+    });
+
+    // Filter out expired invitations
+    return invitations.filter(inv => new Date() < inv.expiresAt);
+}
+
+
 export async function getUserOrganization() {
     const session = await auth.api.getSession({
         headers: await headers()
@@ -151,6 +176,25 @@ export async function getUserOrganization() {
         return null;
     }
 
+    // Get the active organization from session or the first one
+    const activeOrgId = session.session.activeOrganizationId;
+
+    if (activeOrgId) {
+        const membership = await db.query.member.findFirst({
+            where: (member, { eq, and }) => and(
+                eq(member.userId, session.user.id),
+                eq(member.organizationId, activeOrgId)
+            ),
+            with: {
+                organization: true
+            }
+        });
+        if (membership) {
+            return membership.organization;
+        }
+    }
+
+    // Fallback to first organization
     const membership = await db.query.member.findFirst({
         where: eq(member.userId, session.user.id),
         with: {
@@ -159,6 +203,29 @@ export async function getUserOrganization() {
     });
 
     return membership?.organization || null;
+}
+
+export async function getUserOrganizations() {
+    const session = await auth.api.getSession({
+        headers: await headers()
+    });
+
+    if (!session) {
+        return [];
+    }
+
+    const memberships = await db.query.member.findMany({
+        where: eq(member.userId, session.user.id),
+        with: {
+            organization: true
+        }
+    });
+
+    return memberships.map(m => ({
+        ...m.organization,
+        role: m.role,
+        membershipId: m.id
+    }));
 }
 
 export async function acceptInvitation(email: string, organizationId: string) {
@@ -198,12 +265,15 @@ export async function acceptInvitation(email: string, organizationId: string) {
             return { error: "This invitation has already been used" };
         }
 
-        // Check if user is already a member
+        // Check if user is already a member of THIS specific organization
         const existingMember = await db.query.member.findFirst({
-            where: eq(member.userId, session.user.id),
+            where: (member, { eq, and }) => and(
+                eq(member.userId, session.user.id),
+                eq(member.organizationId, organizationId)
+            ),
         });
 
-        if (existingMember && existingMember.organizationId === organizationId) {
+        if (existingMember) {
             return { error: "You are already a member of this organization" };
         }
 
@@ -228,3 +298,39 @@ export async function acceptInvitation(email: string, organizationId: string) {
         return { error: "Failed to accept invitation" };
     }
 }
+
+export async function setActiveOrganization(organizationId: string) {
+    const authSession = await auth.api.getSession({
+        headers: await headers()
+    });
+
+    if (!authSession) {
+        return { error: "Unauthorized" };
+    }
+
+    // Verify user is a member of this organization
+    const membership = await db.query.member.findFirst({
+        where: and(
+            eq(member.userId, authSession.user.id),
+            eq(member.organizationId, organizationId)
+        ),
+    });
+
+    if (!membership) {
+        return { error: "You are not a member of this organization" };
+    }
+
+    try {
+        // Update the session's active organization
+        await db
+            .update(session)
+            .set({ activeOrganizationId: organizationId })
+            .where(eq(session.userId, authSession.user.id));
+
+        return { success: true };
+    } catch (error) {
+        console.error("Error setting active organization:", error);
+        return { error: "Failed to set active organization" };
+    }
+}
+

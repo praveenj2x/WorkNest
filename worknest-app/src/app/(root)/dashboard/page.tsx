@@ -1,10 +1,11 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getUserOrganization } from "@/actions/organization";
+import { getUserOrganization, getPendingInvitations } from "@/actions/organization";
 import { getOrganizationTeams, getOrganizationMembers } from "@/actions/teams";
 import { redirect } from "next/navigation";
 import { Users, UserPlus, Briefcase } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { PendingInvitationsCard } from "@/components/pending-invitations-card";
 
 export default async function DashboardPage() {
   const session = await auth.api.getSession({
@@ -23,12 +24,17 @@ export default async function DashboardPage() {
 
   const teamsResult = await getOrganizationTeams(organization.id);
   const membersResult = await getOrganizationMembers(organization.id);
+  const pendingInvitations = await getPendingInvitations();
 
   const teams = teamsResult.success ? teamsResult.teams : [];
   const members = membersResult.success ? membersResult.members : [];
 
   return (
     <div className="space-y-8">
+      {pendingInvitations.length > 0 && (
+        <PendingInvitationsCard invitations={pendingInvitations} />
+      )}
+
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground mt-2">
@@ -69,7 +75,7 @@ export default async function DashboardPage() {
             <UserPlus className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">0</div>
+            <div className="text-2xl font-bold">{pendingInvitations.length}</div>
             <p className="text-xs text-muted-foreground">
               Awaiting acceptance
             </p>

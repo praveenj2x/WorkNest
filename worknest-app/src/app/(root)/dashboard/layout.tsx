@@ -1,9 +1,10 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getUserOrganization } from "@/actions/organization";
+import { getUserOrganization, getUserOrganizations } from "@/actions/organization";
 import { redirect } from "next/navigation";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import { OrganizationSwitcher } from "@/components/organization-switcher";
 
 export default async function DashboardLayout({
   children,
@@ -15,10 +16,11 @@ export default async function DashboardLayout({
   });
 
   if (!session) {
-    redirect("/auth/sign-in");
+    redirect("/auth");
   }
 
   const organization = await getUserOrganization();
+  const organizations = await getUserOrganizations();
 
   if (!organization) {
     redirect("/onboarding");
@@ -40,7 +42,22 @@ export default async function DashboardLayout({
       />
       <main className="flex-1 overflow-auto">
         <div className="container mx-auto p-6">
-          <SidebarTrigger className="mb-4" />
+          <div className="flex items-center justify-between mb-4">
+            <SidebarTrigger />
+            {organizations.length > 1 && (
+              <div className="w-64">
+                <OrganizationSwitcher
+                  organizations={organizations}
+                  currentOrganization={{
+                    id: organization.id,
+                    name: organization.name,
+                    slug: organization.slug,
+                    role: organizations.find(o => o.id === organization.id)?.role || "member",
+                  }}
+                />
+              </div>
+            )}
+          </div>
           {children}
         </div>
       </main>

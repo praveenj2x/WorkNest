@@ -14,18 +14,18 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL("/auth", request.url));
     }
 
-    // Check if user has an organization
-    const userMembership = await db.query.member.findFirst({
+    // Check if user has any organization memberships
+    const userMemberships = await db.query.member.findMany({
         where: eq(member.userId, session.user.id)
     });
 
     // If accessing dashboard but no org, redirect to onboarding
-    if (request.nextUrl.pathname.startsWith("/dashboard") && !userMembership) {
+    if (request.nextUrl.pathname.startsWith("/dashboard") && userMemberships.length === 0) {
         return NextResponse.redirect(new URL("/onboarding", request.url));
     }
 
     // If accessing onboarding but has org, redirect to dashboard
-    if (request.nextUrl.pathname.startsWith("/onboarding") && userMembership) {
+    if (request.nextUrl.pathname.startsWith("/onboarding") && userMemberships.length > 0) {
         return NextResponse.redirect(new URL("/dashboard", request.url));
     }
 

@@ -1,1 +1,1 @@
-export * from "../db/schema/idk"
+export * from "./schema/index";

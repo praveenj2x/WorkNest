@@ -10,7 +10,7 @@ interface PendingInvitation {
     id: string;
     organizationId: string;
     email: string;
-    role: string;
+    role: string | null;
     expiresAt: Date;
     organization: {
         id: string;
