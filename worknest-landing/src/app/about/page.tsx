@@ -4,13 +4,13 @@ import Footer from '@/components/Footer';
 import OurStory from '@/components/about/OurStory';
 
 export const metadata = {
-  title: "About WorkNest - Our Story & Mission",
-  description: "Learn about WorkNest's journey to transform HR management with AI-powered solutions. Meet our team and discover our values.",
+  title: "About GhostNet - Our Haunting Tale & Cursed Mission",
+  description: "Learn about GhostNet's journey to transform the supernatural realm with AI-powered spectral solutions. Meet our phantom team and discover our dark values.",
 };
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#0a0a0a]">
       <Navbar />
       <AboutHero />
       <OurStory />

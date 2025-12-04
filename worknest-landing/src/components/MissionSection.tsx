@@ -54,14 +54,20 @@ export default function MissionSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-[#F5F1DC] py-20 md:py-32">
-      <div className="px-6 md:px-12 lg:px-16 xl:px-24">
+    <section ref={sectionRef} className="bg-gradient-to-b from-[#1a0a1a] to-[#0a0a0a] py-20 md:py-32 relative overflow-hidden">
+      {/* Spooky background */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-10 left-10 text-9xl">🕸️</div>
+        <div className="absolute bottom-20 right-20 text-8xl">🦇</div>
+      </div>
+
+      <div className="px-6 md:px-12 lg:px-16 xl:px-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Text Display Section - Left */}
+          {/* Emoji Display Section - Left */}
           <div ref={imageRef} className="relative">
-            <div className="relative overflow-hidden rounded-2xl flex items-center justify-center h-[400px] md:h-[500px] lg:h-[600px]">
-              <span className="yarndings-20-regular text-[280px] md:text-[380px] lg:text-[480px] font-serif text-[#FF204E] leading-none select-none">
-                l
+            <div className="relative overflow-hidden rounded-2xl flex items-center justify-center h-[400px] md:h-[500px] lg:h-[600px] bg-gradient-to-br from-[#6a0dad]/20 to-[#ff6b35]/20 border-2 border-[#6a0dad]/30">
+              <span className="text-[200px] md:text-[280px] lg:text-[360px] leading-none select-none filter drop-shadow-[0_0_40px_rgba(255,107,53,0.6)]">
+                🎃
               </span>
             </div>
           </div>
@@ -70,55 +76,54 @@ export default function MissionSection() {
           <div ref={contentRef} className="mission-content">
             {/* Small heading */}
             <div className="mb-6">
-              <span className="funnel-sans-medium text-sm md:text-base text-[#0046FF] uppercase tracking-wider">
-                Our Mission
+              <span className="funnel-sans-medium text-sm md:text-base text-[#ff6b35] uppercase tracking-wider">
+                Our Haunting Mission
               </span>
             </div>
 
             {/* Main heading */}
-            <h2 className="sorts-mill-goudy-regular text-4xl md:text-5xl lg:text-6xl text-[#001BB7] leading-tight mb-8">
-              Transforming HR for the Future of Work
+            <h2 className="sorts-mill-goudy-regular text-4xl md:text-5xl lg:text-6xl text-[#ff6b35] leading-tight mb-8 drop-shadow-[0_0_20px_rgba(255,107,53,0.3)]">
+              Summoning the Future of Spectral Work 👻
             </h2>
 
             {/* Mission statement */}
             <div className="space-y-6 mb-8">
-              <p className="funnel-sans-regular text-lg md:text-xl text-[#001BB7]/80 leading-relaxed">
-                We believe that great companies are built by great people. Our mission is to empower 
-                HR professionals with intelligent tools that make managing people not just easier, 
-                but more meaningful.
+              <p className="funnel-sans-regular text-lg md:text-xl text-[#ff8c00]/80 leading-relaxed">
+                We believe that great covens are built by great phantoms. Our mission is to empower
+                supernatural professionals with mystical tools that make managing spirits not just easier,
+                but more bewitching.
               </p>
-              
-              <p className="funnel-sans-regular text-lg md:text-xl text-[#001BB7]/80 leading-relaxed">
-                By combining cutting-edge AI with human-centered design, we're creating a future 
-                where HR teams can focus on what truly matters: building thriving workplace cultures 
-                and helping every employee reach their full potential.
+
+              <p className="funnel-sans-regular text-lg md:text-xl text-[#ff8c00]/80 leading-relaxed">
+                By combining cutting-edge dark magic with phantom-centered design, we're creating a future
+                where ghostly teams can focus on what truly matters: building thriving haunted cultures
+                and helping every specter reach their full supernatural potential.
               </p>
             </div>
 
             {/* Mission points */}
             <div className="space-y-4">
               <div className="flex items-start space-x-4">
-                <div className="w-2 h-2 bg-[#0046FF] rounded-full mt-3 flex-shrink-0"></div>
-                <p className="funnel-sans-regular text-base md:text-lg text-[#001BB7]/70">
-                  Simplify complex HR processes with intelligent automation
+                <div className="text-2xl mt-1">🔮</div>
+                <p className="funnel-sans-regular text-base md:text-lg text-[#ff8c00]/70">
+                  Simplify complex haunting processes with intelligent necromancy
                 </p>
               </div>
-              
+
               <div className="flex items-start space-x-4">
-                <div className="w-2 h-2 bg-[#0046FF] rounded-full mt-3 flex-shrink-0"></div>
-                <p className="funnel-sans-regular text-base md:text-lg text-[#001BB7]/70">
-                  Provide actionable insights that drive better decision-making
+                <div className="text-2xl mt-1">🌙</div>
+                <p className="funnel-sans-regular text-base md:text-lg text-[#ff8c00]/70">
+                  Provide spectral insights from the crystal ball that drive better cursed decision-making
                 </p>
               </div>
-              
+
               <div className="flex items-start space-x-4">
-                <div className="w-2 h-2 bg-[#0046FF] rounded-full mt-3 flex-shrink-0"></div>
-                <p className="funnel-sans-regular text-base md:text-lg text-[#001BB7]/70">
-                  Create more engaging and supportive employee experiences
+                <div className="text-2xl mt-1">⚡</div>
+                <p className="funnel-sans-regular text-base md:text-lg text-[#ff8c00]/70">
+                  Create more spine-chilling and supportive phantom experiences
                 </p>
               </div>
             </div>
-
 
           </div>
         </div>

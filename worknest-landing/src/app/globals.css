@@ -52,6 +52,41 @@ img, video {
   will-change: transform;
 }
 
+/* Halloween Animations */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-bounce {
+  animation: bounce 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.delay-100 {
+  animation-delay: 0.5s;
+}
+
+.delay-200 {
+  animation-delay: 1s;
+}
+
 /* Font Classes */
 .yarndings-20-regular {
   font-family: "Yarndings 20", system-ui;

@@ -2,13 +2,13 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://worknest.dev"),
-  title: "WorkNest - Empower HR with Intelligence",
-  description: "Transform your workplace with AI-powered HR insights, streamlined workflows, and intelligent automation that puts people first. Modern HR management platform in development.",
-  keywords: ["HR management", "human resources", "AI-powered", "workforce analytics", "employee onboarding", "performance management"],
-  authors: [{ name: "WorkNest Team" }],
-  creator: "WorkNest",
-  publisher: "WorkNest",
+  metadataBase: new URL("https://ghostnet.dev"),
+  title: "GhostNet - Haunt Your Workflow with Spectral Intelligence",
+  description: "Unleash supernatural productivity with AI-powered insights that materialize from the shadows. A phantom-powered platform that brings your team's potential back from the dead.",
+  keywords: ["ghost", "halloween", "spooky", "AI-powered", "supernatural productivity", "phantom workforce", "spectral management"],
+  authors: [{ name: "GhostNet Team" }],
+  creator: "GhostNet",
+  publisher: "GhostNet",
   robots: {
     index: true,
     follow: true,
@@ -16,24 +16,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://worknest.dev",
-    title: "WorkNest - Empower HR with Intelligence",
-    description: "Transform your workplace with AI-powered HR insights, streamlined workflows, and intelligent automation that puts people first.",
-    siteName: "WorkNest",
+    url: "https://ghostnet.dev",
+    title: "GhostNet - Haunt Your Workflow with Spectral Intelligence",
+    description: "Unleash supernatural productivity with AI-powered insights that materialize from the shadows.",
+    siteName: "GhostNet",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "WorkNest - Empower HR with Intelligence",
+        alt: "GhostNet - Haunt Your Workflow with Spectral Intelligence",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "WorkNest - Empower HR with Intelligence",
-    description: "Transform your workplace with AI-powered HR insights, streamlined workflows, and intelligent automation that puts people first.",
-    creator: "@worknest",
+    title: "GhostNet - Haunt Your Workflow with Spectral Intelligence",
+    description: "Unleash supernatural productivity with AI-powered insights that materialize from the shadows.",
+    creator: "@ghostnet",
     images: ["/og-image.png"],
   },
 };
@@ -42,7 +42,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#001BB7",
+  themeColor: "#6a0dad",
 };
 
 export default function RootLayout({

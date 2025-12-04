@@ -55,61 +55,70 @@ export default function PricingSection() {
 
   const plans = [
     {
-      name: 'Starter',
-      description: 'Perfect for small teams getting started',
-      price: '49',
-      period: 'per month',
+      name: 'Poltergeist',
+      description: 'For small haunts just starting their spectral journey',
+      price: '13',
+      period: 'per moon cycle',
+      emoji: '👻',
       features: [
-        'Up to 50 employees',
-        'Core HR features',
-        'Email support',
-        'Basic analytics',
-        'Mobile app access'
+        'Up to 50 phantom employees',
+        'Basic haunting features',
+        'Ouija board support',
+        'Spectral analytics',
+        'Mobile séance access'
       ],
       highlighted: false
     },
     {
-      name: 'Professional',
-      description: 'For growing teams that need more power',
-      price: '149',
-      period: 'per month',
+      name: 'Phantom',
+      description: 'For growing covens that need supernatural power',
+      price: '31',
+      period: 'per moon cycle',
+      emoji: '🎃',
       features: [
-        'Up to 200 employees',
-        'Advanced HR automation',
-        'Priority support',
-        'AI-powered insights',
-        'Custom integrations',
-        'Advanced analytics'
+        'Up to 200 ghostly employees',
+        'Advanced dark magic automation',
+        'Priority necromancy support',
+        'AI-powered crystal ball insights',
+        'Custom spell integrations',
+        'Advanced haunting analytics'
       ],
       highlighted: true
     },
     {
-      name: 'Enterprise',
-      description: 'Custom solutions for large organizations',
-      price: 'Custom',
-      period: 'contact us',
+      name: 'Demon Lord',
+      description: 'Ultimate power for massive supernatural organizations',
+      price: '666',
+      period: 'eternal contract',
+      emoji: '😈',
       features: [
-        'Unlimited employees',
-        'Full platform access',
-        'Dedicated support',
-        'Custom AI training',
-        'Advanced security',
-        'SLA guarantee'
+        'Unlimited undead workforce',
+        'Full underworld access',
+        'Dedicated demon support',
+        'Custom AI necromancy',
+        'Hellfire security',
+        'Immortal SLA guarantee'
       ],
       highlighted: false
     }
   ];
 
   return (
-    <section ref={sectionRef} className="bg-[#F5F1DC] py-20 md:py-32" id="pricing">
-      <div className="px-6 md:px-12 lg:px-16 xl:px-24">
+    <section ref={sectionRef} className="bg-gradient-to-b from-[#1a0a1a] to-[#0a0a0a] py-20 md:py-32 relative overflow-hidden" id="pricing">
+      {/* Spooky background */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-10 left-20 text-9xl">🕸️</div>
+        <div className="absolute bottom-20 right-20 text-8xl">🦇</div>
+      </div>
+
+      <div className="px-6 md:px-12 lg:px-16 xl:px-24 relative z-10">
         {/* Section Title */}
         <div ref={titleRef} className="text-center mb-16 md:mb-20">
-          <h2 className="sorts-mill-goudy-regular text-5xl md:text-6xl lg:text-7xl text-[#001BB7] leading-tight mb-6">
-            Simple, transparent pricing
+          <h2 className="sorts-mill-goudy-regular text-5xl md:text-6xl lg:text-7xl text-[#ff6b35] leading-tight mb-6 drop-shadow-[0_0_20px_rgba(255,107,53,0.3)]">
+            Frighteningly affordable pricing 💀
           </h2>
-          <p className="funnel-sans-regular text-xl md:text-2xl text-[#001BB7]/70 max-w-2xl mx-auto">
-            Choose the plan that's right for your team
+          <p className="funnel-sans-regular text-xl md:text-2xl text-[#ff8c00]/70 max-w-2xl mx-auto">
+            Choose your level of supernatural power
           </p>
         </div>
 
@@ -118,60 +127,56 @@ export default function PricingSection() {
           {plans.map((plan, index) => (
             <div
               key={index}
-              ref={(el) => { 
-                cardsRef.current[index] = el; 
+              ref={(el) => {
+                cardsRef.current[index] = el;
               }}
-              className={`relative rounded-3xl p-8 md:p-10 transition-all duration-300 ${
-                plan.highlighted
-                  ? 'bg-[#001BB7] text-white scale-105 md:scale-110 shadow-2xl'
-                  : 'bg-white border-2 border-[#001BB7]/10 hover:border-[#0046FF]/30 hover:shadow-xl'
-              }`}
+              className={`relative rounded-3xl p-8 md:p-10 transition-all duration-300 border-2 ${plan.highlighted
+                  ? 'bg-gradient-to-br from-[#6a0dad] to-[#8b2dd9] text-white scale-105 md:scale-110 shadow-2xl shadow-[#6a0dad]/50 border-[#ff6b35]'
+                  : 'bg-gradient-to-br from-[#1a0a1a] to-[#0a0a0a] border-[#6a0dad]/30 hover:border-[#ff6b35]/50 hover:shadow-xl hover:shadow-[#6a0dad]/30'
+                }`}
             >
               {/* Popular Badge */}
               {plan.highlighted && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="funnel-sans-semibold text-sm bg-[#FF8040] text-white px-4 py-2 rounded-full">
-                    MOST POPULAR
+                  <span className="funnel-sans-semibold text-sm bg-[#ff6b35] text-white px-4 py-2 rounded-full shadow-lg">
+                    MOST CURSED
                   </span>
                 </div>
               )}
 
+              {/* Emoji */}
+              <div className="text-6xl mb-4 text-center">{plan.emoji}</div>
+
               {/* Plan Name */}
               <h3
-                className={`sorts-mill-goudy-regular text-3xl md:text-4xl mb-3 ${
-                  plan.highlighted ? 'text-white' : 'text-[#001BB7]'
-                }`}
+                className={`sorts-mill-goudy-regular text-3xl md:text-4xl mb-3 text-center ${plan.highlighted ? 'text-white' : 'text-[#ff6b35]'
+                  }`}
               >
                 {plan.name}
               </h3>
 
               {/* Description */}
               <p
-                className={`funnel-sans-regular text-base mb-6 ${
-                  plan.highlighted ? 'text-white/80' : 'text-[#001BB7]/70'
-                }`}
+                className={`funnel-sans-regular text-base mb-6 text-center ${plan.highlighted ? 'text-white/80' : 'text-[#ff8c00]/70'
+                  }`}
               >
                 {plan.description}
               </p>
 
               {/* Price */}
               <div className="mb-8">
-                <div className="flex items-baseline gap-2">
-                  {plan.price !== 'Custom' && (
-                    <span className="text-2xl funnel-sans-regular">$</span>
-                  )}
+                <div className="flex items-baseline gap-2 justify-center">
+                  <span className="text-2xl funnel-sans-regular">$</span>
                   <span
-                    className={`sorts-mill-goudy-regular text-5xl md:text-6xl ${
-                      plan.highlighted ? 'text-white' : 'text-[#001BB7]'
-                    }`}
+                    className={`sorts-mill-goudy-regular text-5xl md:text-6xl ${plan.highlighted ? 'text-white' : 'text-[#ff6b35]'
+                      }`}
                   >
                     {plan.price}
                   </span>
                 </div>
                 <p
-                  className={`funnel-sans-regular text-sm mt-1 ${
-                    plan.highlighted ? 'text-white/70' : 'text-[#001BB7]/60'
-                  }`}
+                  className={`funnel-sans-regular text-sm mt-1 text-center ${plan.highlighted ? 'text-white/70' : 'text-[#ff8c00]/60'
+                    }`}
                 >
                   {plan.period}
                 </p>
@@ -179,13 +184,12 @@ export default function PricingSection() {
 
               {/* CTA Button */}
               <button
-                className={`w-full py-4 rounded-full funnel-sans-semibold text-lg mb-8 transition-all duration-300 ${
-                  plan.highlighted
-                    ? 'bg-white text-[#001BB7] hover:bg-[#FF8040] hover:text-white'
-                    : 'bg-[#001BB7] text-white hover:bg-[#0046FF]'
-                }`}
+                className={`w-full py-4 rounded-full funnel-sans-semibold text-lg mb-8 transition-all duration-300 ${plan.highlighted
+                    ? 'bg-white text-[#6a0dad] hover:bg-[#ff6b35] hover:text-white shadow-lg'
+                    : 'bg-[#6a0dad] text-white hover:bg-[#8b2dd9] hover:shadow-lg hover:shadow-[#6a0dad]/50'
+                  }`}
               >
-                {plan.price === 'Custom' ? 'Contact Sales' : 'Get Started'}
+                {plan.name === 'Demon Lord' ? 'Summon Demons' : 'Start Haunting'}
               </button>
 
               {/* Features List */}
@@ -193,9 +197,8 @@ export default function PricingSection() {
                 {plan.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-3">
                     <svg
-                      className={`w-6 h-6 flex-shrink-0 mt-0.5 ${
-                        plan.highlighted ? 'text-[#FF8040]' : 'text-[#0046FF]'
-                      }`}
+                      className={`w-6 h-6 flex-shrink-0 mt-0.5 ${plan.highlighted ? 'text-[#ff6b35]' : 'text-[#39ff14]'
+                        }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -208,9 +211,8 @@ export default function PricingSection() {
                       />
                     </svg>
                     <span
-                      className={`funnel-sans-regular ${
-                        plan.highlighted ? 'text-white/90' : 'text-[#001BB7]/80'
-                      }`}
+                      className={`funnel-sans-regular ${plan.highlighted ? 'text-white/90' : 'text-[#ff8c00]/80'
+                        }`}
                     >
                       {feature}
                     </span>
@@ -223,8 +225,8 @@ export default function PricingSection() {
 
         {/* Bottom Note */}
         <div className="text-center mt-16">
-          <p className="funnel-sans-regular text-[#001BB7]/60 text-lg">
-            All plans include a 14-day free trial. No credit card required.
+          <p className="funnel-sans-regular text-[#ff8c00]/60 text-lg">
+            All plans include a 13-night free trial. No soul required. 👻
           </p>
         </div>
       </div>
