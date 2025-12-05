@@ -1,13 +1,13 @@
 ```
-░██       ░██                     ░██       ░███    ░██                          ░██    
-░██       ░██                     ░██       ░████   ░██                          ░██    
-░██  ░██  ░██  ░███████  ░██░████ ░██    ░██░██░██  ░██  ░███████   ░███████  ░████████ 
-░██ ░████ ░██ ░██    ░██ ░███     ░██   ░██ ░██ ░██ ░██ ░██    ░██ ░██           ░██    
-░██░██ ░██░██ ░██    ░██ ░██      ░███████  ░██  ░██░██ ░█████████  ░███████     ░██    
-░████   ░████ ░██    ░██ ░██      ░██   ░██ ░██   ░████ ░██               ░██    ░██    
-░███     ░███  ░███████  ░██      ░██    ░██░██    ░███  ░███████   ░███████      ░████
+ _______  __   __  _______  _______  _______  __    _  _______  _______ 
+|       ||  | |  ||       ||       ||       ||  |  | ||       ||       |
+|    ___||  |_|  ||   _   ||  _____||_     _||   |_| ||    ___||_     _|
+|   | __ |       ||  | |  || |_____   |   |  |       ||   |___   |   |  
+|   ||  ||       ||  |_|  ||_____  |  |   |  |  _    ||    ___|  |   |  
+|   |_| ||   _   ||       | _____| |  |   |  | | |   ||   |___   |   |  
+|_______||__| |__||_______||_______|  |___|  |_|  |__||_______|  |___|  
 ```
-# WorkNest – AI-Powered HR Workflow Automation  
+# GhostNet – AI-Powered HR Workflow Automation  
 
 (☞ﾟヮﾟ)☞ Built during the **Kiro Hackathon** using **Kiro IDE**, **Kiro Hooks**, and **MCP**  
 
@@ -40,6 +40,7 @@ This project embodies the **Frankenstein** category — stitching together AI, a
 | (づ｡◕‿‿◕｡)づ **Smart Onboarding** | Generates personalized onboarding tasks and feedback workflows. |
 | (¬‿¬) **Workflow Automation** | Uses **Kiro Hooks** to trigger HR processes automatically. |
 
+I am still working **
 ---
 
 ## Tech Stack (•̀ᴗ•́)و  
