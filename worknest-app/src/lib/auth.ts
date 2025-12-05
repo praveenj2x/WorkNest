@@ -8,6 +8,11 @@ export const auth = betterAuth({
     database: drizzleAdapter(db, {
         provider: "pg",
     }),
+    emailAndPassword: {
+        enabled: true,
+        requireEmailVerification: false, // Set to true if you want to require email verification
+        minPasswordLength: 8,
+    },
      socialProviders: {
         github: { 
             clientId: process.env.GITHUB_CLIENT_ID as string, 

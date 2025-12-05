@@ -2,19 +2,78 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useState, Suspense } from "react";
-import { signIn } from "@/lib/auth-client";
+import { signIn, signUp } from "@/lib/auth-client";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { useSearchParams } from "next/navigation";
-import { Loader2, Users, CheckCircle2, Sparkles } from "lucide-react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { Loader2, Users, CheckCircle2, Sparkles, Mail, Lock, User } from "lucide-react";
 
 function SignInContent() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [error, setError] = useState("");
+
+  // Form states
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const callbackURL = redirect || "/dashboard";
+
+  const handleEmailSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const result = await signIn.email({
+        email,
+        password,
+        callbackURL,
+      });
+
+      if (result.error) {
+        setError(result.error.message || "Failed to sign in");
+      } else {
+        router.push(callbackURL);
+      }
+    } catch (err: any) {
+      setError(err.message || "An error occurred during sign in");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEmailSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const result = await signUp.email({
+        email,
+        password,
+        name,
+        callbackURL,
+      });
+
+      if (result.error) {
+        setError(result.error.message || "Failed to sign up");
+      } else {
+        router.push(callbackURL);
+      }
+    } catch (err: any) {
+      setError(err.message || "An error occurred during sign up");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen w-full flex">
@@ -83,12 +142,140 @@ function SignInContent() {
 
           <Card className="border-2 shadow-xl">
             <CardHeader className="space-y-1 pb-4">
-              <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
+              {/* Mode Switcher */}
+              <div className="flex gap-2 mb-4 p-1 bg-muted rounded-lg">
+                <button
+                  onClick={() => {
+                    setMode("signin");
+                    setError("");
+                  }}
+                  className={cn(
+                    "flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all",
+                    mode === "signin"
+                      ? "bg-background shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  Sign In
+                </button>
+                <button
+                  onClick={() => {
+                    setMode("signup");
+                    setError("");
+                  }}
+                  className={cn(
+                    "flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all",
+                    mode === "signup"
+                      ? "bg-background shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  Sign Up
+                </button>
+              </div>
+
+              <CardTitle className="text-2xl font-bold">
+                {mode === "signin" ? "Welcome back" : "Create account"}
+              </CardTitle>
               <CardDescription className="text-base">
-                Sign in to your account to continue
+                {mode === "signin"
+                  ? "Sign in to your account to continue"
+                  : "Sign up to get started with GhostNet"}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              {/* Email/Password Form */}
+              <form onSubmit={mode === "signin" ? handleEmailSignIn : handleEmailSignUp} className="space-y-4">
+                {mode === "signup" && (
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Name</Label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        id="name"
+                        type="text"
+                        placeholder="John Doe"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        className="pl-10 h-12"
+                        disabled={loading}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="pl-10 h-12"
+                      disabled={loading}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      minLength={8}
+                      className="pl-10 h-12"
+                      disabled={loading}
+                    />
+                  </div>
+                  {mode === "signup" && (
+                    <p className="text-xs text-muted-foreground">
+                      Password must be at least 8 characters
+                    </p>
+                  )}
+                </div>
+
+                {error && (
+                  <div className="p-3 rounded-md bg-destructive/10 border border-destructive/20">
+                    <p className="text-sm text-destructive">{error}</p>
+                  </div>
+                )}
+
+                <Button
+                  type="submit"
+                  className="w-full h-12 text-base font-medium"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                  ) : (
+                    mode === "signin" ? "Sign In" : "Sign Up"
+                  )}
+                </Button>
+              </form>
+
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-card px-2 text-muted-foreground">
+                    Or continue with
+                  </span>
+                </div>
+              </div>
+
+              {/* Social Sign In Buttons */}
               <Button
                 variant="outline"
                 className="w-full h-12 text-base font-medium hover:bg-accent hover:scale-[1.02] transition-all duration-200"
@@ -159,18 +346,7 @@ function SignInContent() {
                 )}
               </Button>
 
-              <div className="relative my-6">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t" />
-                </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-card px-2 text-muted-foreground">
-                    Secure authentication
-                  </span>
-                </div>
-              </div>
-
-              <p className="text-center text-xs text-muted-foreground px-4">
+              <p className="text-center text-xs text-muted-foreground px-4 pt-4">
                 By continuing, you agree to our{" "}
                 <Link href="#" className="underline hover:text-foreground transition-colors">
                   Terms of Service
